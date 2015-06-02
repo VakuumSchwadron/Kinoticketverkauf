@@ -16,10 +16,13 @@ import de.uni_hamburg.informatik.swt.se2.kino.werkzeuge.vorstellungsauswaehler.V
  * eine Vorstellung auswählen und Karten für diese Vorstellung verkaufen und
  * stornieren.
  * 
+ * Das KassenWerkzeug implementiert das Interface Beobachter. Von ihm werden 
+ * die Werkzeuge DatumAuswaehlWerkzeug und VorstellungsAuswaehlWerkzeug beobachtet.
+ * 
  * @author SE2-Team
  * @version SoSe 2015
  */
-public class KassenWerkzeug
+public class KassenWerkzeug implements Beobachter
 {
     // Das Material dieses Werkzeugs
     private Kino _kino;
@@ -49,7 +52,12 @@ public class KassenWerkzeug
         _platzVerkaufsWerkzeug = new PlatzVerkaufsWerkzeug();
         _datumAuswaehlWerkzeug = new DatumAuswaehlWerkzeug();
         _vorstellungAuswaehlWerkzeug = new VorstellungsAuswaehlWerkzeug();
-
+        
+        //Registrierung als Beobachter
+        _datumAuswaehlWerkzeug.registriereBeobachter(this);
+        _vorstellungAuswaehlWerkzeug.registriereBeobachter(this);
+        
+        
         // UI erstellen (mit eingebetteten UIs der direkten Subwerkzeuge)
         _ui = new KassenWerkzeugUI(_platzVerkaufsWerkzeug.getUIPanel(),
                 _datumAuswaehlWerkzeug.getUIPanel(),
@@ -60,6 +68,20 @@ public class KassenWerkzeug
         setzeAusgewaehlteVorstellung();
 
         _ui.zeigeFenster();
+    }
+    
+    @Override
+    public void reagiereAufAenderung(Object o)
+    {
+        if(o instanceof DatumAuswaehlWerkzeug)
+        {
+            setzeTagesplanFuerAusgewaehltesDatum();
+        }
+            
+        else if (o instanceof VorstellungsAuswaehlWerkzeug)
+        {
+            setzeAusgewaehlteVorstellung();
+        }
     }
 
     /**
