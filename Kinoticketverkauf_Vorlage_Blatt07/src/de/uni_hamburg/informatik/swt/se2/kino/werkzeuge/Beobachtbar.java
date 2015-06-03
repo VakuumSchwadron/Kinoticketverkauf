@@ -28,7 +28,7 @@ public abstract class Beobachtbar
     
     
     /**
-     * Meldet den gegebenen Beoabachter beim an.
+     * Meldet den gegebenen Beoabachter beim zu beobachteten Objekt an.
      * 
      * @param beobachter Ein Beobachter, der angemeldet werden soll.
      * 
@@ -45,7 +45,7 @@ public abstract class Beobachtbar
     
     
     /**
-     * Meldet den gegebenen Beoabachter beim ab.
+     * Meldet den gegebenen Beoabachter ab.
      * 
      * @param beobachter Ein Beobachter, der abgemeldet werden soll.
      * 
@@ -58,7 +58,7 @@ public abstract class Beobachtbar
     }
 
     /**
-     * Informiert alle angemeldeten Beobachter dass eine relevante Änderung
+     * Informiert alle angemeldeten Beobachter, dass eine relevante Änderung
      * eingetreten ist.
      */
     protected void informiereUeberAenderung()
