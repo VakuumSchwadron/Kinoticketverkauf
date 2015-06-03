@@ -18,7 +18,7 @@ import de.uni_hamburg.informatik.swt.se2.kino.werkzeuge.vorstellungsauswaehler.V
  * stornieren.
  * 
  * Das KassenWerkzeug implementiert das Interface Beobachter. Von ihm werden 
- * die Werkzeuge DatumAuswaehlWerkzeug und VorstellungsAuswaehlWerkzeug beobachtet.
+ * die Werkzeuge DatumAuswaehlWerkzeug und VorstellungsAuswaehlWerkzeug beobachtet. 
  * 
  * @author SE2-Team
  * @version SoSe 2015
