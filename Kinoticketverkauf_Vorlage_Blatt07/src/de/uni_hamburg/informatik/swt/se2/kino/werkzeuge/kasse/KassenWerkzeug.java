@@ -55,6 +55,7 @@ public class KassenWerkzeug implements Beobachter
         _vorstellungAuswaehlWerkzeug = new VorstellungsAuswaehlWerkzeug();
         
         //Registrierung als Beobachter
+        _platzVerkaufsWerkzeug.registriereBeobachter(this);
         _datumAuswaehlWerkzeug.registriereBeobachter(this);
         _vorstellungAuswaehlWerkzeug.registriereBeobachter(this);
         
@@ -67,6 +68,7 @@ public class KassenWerkzeug implements Beobachter
         registriereUIAktionen();
         setzeTagesplanFuerAusgewaehltesDatum();
         setzeAusgewaehlteVorstellung();
+        setzeNeuePlatzplan();
 
         _ui.zeigeFenster();
     }
@@ -74,7 +76,11 @@ public class KassenWerkzeug implements Beobachter
     @Override
     public void reagiereAufAenderung(Object o)
     {
-        if(o instanceof DatumAuswaehlWerkzeug)
+        if(o instanceof PlatzVerkaufsWerkzeug)
+        {
+            setzeNeuePlatzplan();
+        }
+        else if(o instanceof DatumAuswaehlWerkzeug)
         {
             setzeTagesplanFuerAusgewaehltesDatum();
         }
@@ -118,6 +124,11 @@ public class KassenWerkzeug implements Beobachter
         _platzVerkaufsWerkzeug.setVorstellung(getAusgewaehlteVorstellung());
     }
 
+    private void setzeNeuePlatzplan()
+    {
+        _platzVerkaufsWerkzeug.setVorstellung(getAusgewaehlteVorstellung());
+    }
+    
     /**
      * Beendet die Anwendung.
      */
