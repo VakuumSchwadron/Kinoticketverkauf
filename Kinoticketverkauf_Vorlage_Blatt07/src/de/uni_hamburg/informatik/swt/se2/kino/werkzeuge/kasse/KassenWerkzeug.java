@@ -8,9 +8,11 @@ import de.uni_hamburg.informatik.swt.se2.kino.materialien.Kino;
 import de.uni_hamburg.informatik.swt.se2.kino.materialien.Tagesplan;
 import de.uni_hamburg.informatik.swt.se2.kino.materialien.Vorstellung;
 import de.uni_hamburg.informatik.swt.se2.kino.werkzeuge.Beobachter;
+import de.uni_hamburg.informatik.swt.se2.kino.werkzeuge.Beobachtbar;
 import de.uni_hamburg.informatik.swt.se2.kino.werkzeuge.datumsauswaehler.DatumAuswaehlWerkzeug;
 import de.uni_hamburg.informatik.swt.se2.kino.werkzeuge.platzverkauf.PlatzVerkaufsWerkzeug;
 import de.uni_hamburg.informatik.swt.se2.kino.werkzeuge.vorstellungsauswaehler.VorstellungsAuswaehlWerkzeug;
+
 
 /**
  * Das Kassenwerkzeug. Mit diesem Werkzeug kann die Benutzerin oder der Benutzer
@@ -55,7 +57,6 @@ public class KassenWerkzeug implements Beobachter
         _vorstellungAuswaehlWerkzeug = new VorstellungsAuswaehlWerkzeug();
         
         //Registrierung als Beobachter
-        _platzVerkaufsWerkzeug.registriereBeobachter(this);
         _datumAuswaehlWerkzeug.registriereBeobachter(this);
         _vorstellungAuswaehlWerkzeug.registriereBeobachter(this);
         
@@ -76,11 +77,10 @@ public class KassenWerkzeug implements Beobachter
     @Override
     public void reagiereAufAenderung(Object o)
     {
-        if(o instanceof PlatzVerkaufsWerkzeug)
-        {
-            setzeNeuePlatzplan();
-        }
-        else if(o instanceof DatumAuswaehlWerkzeug)
+        assert o != null : "Vorbedingung verletzt: null"; 
+        assert o instanceof Beobachtbar : "Vorbedingung verletzt"; 
+        
+        if(o instanceof DatumAuswaehlWerkzeug)
         {
             setzeTagesplanFuerAusgewaehltesDatum();
         }

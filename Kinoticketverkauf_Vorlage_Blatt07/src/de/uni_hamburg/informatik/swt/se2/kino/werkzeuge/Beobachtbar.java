@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Diese Klasse liefert die Funktionalität für beobachtbare Services. Definiert Operationen zum An- und
+ * Diese Klasse liefert die Funktionalität für beobachtbare Klassen. Definiert Operationen zum An- und
  * Abmelden von Beobachtern.
  * 
  * @author VakuumSchwadron
@@ -37,6 +37,7 @@ public abstract class Beobachtbar
     public void registriereBeobachter(Beobachter beobachter)
     {
         assert beobachter != null : "Vorbedingung verletzt: beobachter != null";
+        
         if (!_beobachter.contains(beobachter))
         {
             _beobachter.add(beobachter);
@@ -54,6 +55,7 @@ public abstract class Beobachtbar
     public void entferneBeobachter(Beobachter beobachter)
     {
         assert beobachter != null : "Vorbedingung verletzt: beobachter != null";
+        
         _beobachter.remove(beobachter);
     }
 
